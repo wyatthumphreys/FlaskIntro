@@ -1,5 +1,5 @@
-from flask import Flask, redirect, url_for, request
-app = Flask(__name__)
+from flask import Flask, redirect, url_for, request, render_template
+app = Flask(__name__, static_url_path='')
 
 @app.route('/success/<name>')
 def success(name):
@@ -13,6 +13,10 @@ def login():
    else:
       user = request.args.get('nm')
       return redirect(url_for('success',name = user))
+
+@app.route('/')
+def root():
+   return render_template('login.html')
 
 if __name__ == '__main__':
    app.run(debug = True)
